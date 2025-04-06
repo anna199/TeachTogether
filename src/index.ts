@@ -15,15 +15,35 @@ app.use(express.json());
 // Routes
 app.use('/api/events', eventRoutes);
 
-// MongoDB connection
+// MongoDB connection with improved options
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mom-teach-kids';
-mongoose.connect(MONGODB_URI)
+
+const mongooseOptions: mongoose.ConnectOptions = {
+  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+  socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+  family: 4, // Use IPv4, skip trying IPv6
+  maxPoolSize: 10, // Maintain up to 10 socket connections
+  minPoolSize: 5, // Maintain at least 5 socket connections
+  retryWrites: true
+};
+
+mongoose.connect(MONGODB_URI, mongooseOptions)
   .then(() => {
     console.log('Connected to MongoDB');
   })
   .catch((error) => {
     console.error('MongoDB connection error:', error);
+    process.exit(1); // Exit process with failure
   });
+
+// Handle MongoDB connection events
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

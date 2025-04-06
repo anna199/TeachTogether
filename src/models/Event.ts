@@ -4,7 +4,7 @@ export interface IEvent extends Document {
   title: string;
   hostName: string;
   hostEmail: string;
-  hostPhone: string;
+  hostWechatId: string;
   description: string;
   
   location: {
@@ -55,7 +55,7 @@ const eventSchema = new Schema<IEvent>({
   title: { type: String, required: true },
   hostName: { type: String, required: true },
   hostEmail: { type: String, required: true },
-  hostPhone: { type: String, required: true },
+  hostWechatId: { type: String, required: true },
   description: { type: String, required: true },
   
   location: {
