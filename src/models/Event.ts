@@ -39,7 +39,7 @@ export interface IEvent extends Document {
   participants: Array<{
     parentName: string;
     parentEmail: string;
-    parentPhone: string;
+    parentWechatId: string;
     childName: string;
     childAge: number;
     notes: string;
@@ -90,7 +90,7 @@ const eventSchema = new Schema<IEvent>({
   participants: [{
     parentName: { type: String, required: true },
     parentEmail: { type: String, required: true },
-    parentPhone: { type: String, required: true },
+    parentWechatId: { type: String, required: true },
     childName: { type: String, required: true },
     childAge: { type: Number, required: true },
     notes: String,
