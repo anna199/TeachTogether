@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/api/events', eventRoutes);
 
 // MongoDB connection with improved options
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mom-teach-kids';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/teach-together';
 
 const mongooseOptions: mongoose.ConnectOptions = {
   serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
