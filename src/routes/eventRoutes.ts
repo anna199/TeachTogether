@@ -66,7 +66,7 @@ router.post('/:id/register', asyncHandler(async (req: Request, res: Response) =>
   const newParticipant = {
     parentName: req.body.parentName,
     parentEmail: req.body.parentEmail,
-    parentPhone: req.body.parentPhone,
+    parentWechatId: req.body.parentWechatId,
     childName: req.body.childName,
     childAge: req.body.childAge,
     notes: req.body.notes,
